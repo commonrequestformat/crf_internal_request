@@ -1,0 +1,22 @@
+<?php
+/**
+ * @file
+ * Code for the CRF Internal Request feature.
+ */
+
+include_once 'crf_internal_request.features.inc';
+
+
+/**
+ * Implements hook_node_presave().
+ */
+function crf_internal_request_node_presave($node) {
+  if ($node->type == 'internal_request') {
+    $reporting_type_term = taxonomy_term_load($node->field_reporting_type['und'][0]['target_id']);
+    $node->title = t('@reporting_type Request from @date', array('@reporting_type' => $reporting_type_term->name, '@date' => format_date(strtotime($node->field_crf_req_date['und'][0]['value']), 'request')));
+  }
+}
+
+
+
+
