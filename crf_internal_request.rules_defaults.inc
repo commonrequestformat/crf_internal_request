@@ -25,7 +25,7 @@ function crf_internal_request_default_rules_configuration() {
         { "mail" : {
             "to" : [ "node:field-internal-request:author:mail" ],
             "subject" : "Internal Report provided by [node:author:field-first-name] [node:author:field-last-name] in [node:field-internal-request:title] is now finalised",
-            "message" : "Dear [node:field-internal-request:author:field-first-name] [node:field-internal-request:author:field-last-name],\\r\\n\\r\\nKindly note that the Internal Report by [node:author:field-first-name] [node:author:field-last-name] in the Information Request [node:field-internal-request:title] has been finalised.  The information can be viewed online: [node:url]\\r\\n\\r\\nNo action is required on your part at this time.\\r\\n\\r\\nKind regards,\\r\\nOCHA\\r\\n",
+            "message" : "Dear [node:field-internal-request:author:field-first-name] [node:field-internal-request:author:field-last-name],\\r\\n\\r\\nKindly note that the Internal Report by [node:author:field-first-name] [node:author:field-last-name] in the Information Request [node:field-internal-request:title] has been finalised.\\r\\n\\r\\n[node:log]\\r\\n\\r\\nThe information can be viewed online: [node:url]\\r\\n\\r\\nNo action is required on your part at this time.\\r\\n\\r\\nKind regards,\\r\\nOCHA\\r\\n",
             "from" : [ "node:author:mail" ],
             "language" : [ "" ]
           }
