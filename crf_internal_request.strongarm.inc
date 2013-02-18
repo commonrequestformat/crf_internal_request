@@ -21,7 +21,7 @@ function crf_internal_request_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_internal_request';
-  $strongarm->value = 'edit-print';
+  $strongarm->value = 'edit-submission';
   $export['additional_settings__active_tab_internal_request'] = $strongarm;
 
   $strongarm = new stdClass();

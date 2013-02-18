@@ -28,7 +28,7 @@ function crf_internal_request_node_info() {
       'help' => '',
     ),
     'internal_request' => array(
-      'name' => t('Internal Request'),
+      'name' => t('Request (Internal)'),
       'base' => 'node_content',
       'description' => '',
       'has_title' => '1',

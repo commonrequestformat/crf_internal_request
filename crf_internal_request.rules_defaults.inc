@@ -44,14 +44,23 @@ function crf_internal_request_default_rules_configuration() {
             "node" : [ "node" ],
             "type" : { "value" : { "internal_request" : "internal_request" } }
           }
-        }
+        },
+        { "entity_has_field" : { "entity" : [ "node" ], "field" : "field_int_req_contact" } }
       ],
       "DO" : [
-        { "mail_to_users_of_role" : {
-            "roles" : { "value" : { "52310416" : "52310416" } },
-            "subject" : "New Internal Request (from OCHA)",
-            "message" : "Kindly provide your information online: [node:url]\\r\\n\\r\\nKind regards,\\r\\nOCHA",
-            "from" : [ "node:author:mail" ]
+        { "LOOP" : {
+            "USING" : { "list" : [ "node:field-int-req-contact" ] },
+            "ITEM" : { "current_ocha_focal_point" : "Current OCHA focal point" },
+            "DO" : [
+              { "mail" : {
+                  "to" : [ "current-ocha-focal-point:mail" ],
+                  "subject" : "New Internal OCHA Request for [node:field-reporting-type:name]",
+                  "message" : "Dear [current-ocha-focal-point:field-first-name] [current-ocha-focal-point:field-last-name],\\r\\n\\r\\nOCHA is requesting that you provide [node:field-reporting-type:name] information.\\r\\n\\r\\n[node:field-append-to-alert-email]\\r\\n\\r\\nKindly provide your information online: [node:url]\\r\\n\\r\\nKind regards,\\r\\nOCHA\\r\\n",
+                  "from" : [ "node:author:mail" ],
+                  "language" : [ "" ]
+                }
+              }
+            ]
           }
         }
       ]
