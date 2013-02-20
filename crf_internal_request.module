@@ -18,5 +18,55 @@ function crf_internal_request_node_presave($node) {
 }
 
 
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function crf_internal_request_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+  if ($form['#id'] == 'views-exposed-form-request-content-internal-request-content') {
+    $form['nid'] = crf_internal_request_convert_form_textfield('node', 'internal_request');
+    $form['field_reporting_type_target_id'] = crf_internal_request_convert_form_textfield('taxonomy_term', 'reporting_types');
+    $form['field_int_req_contact_target_id'] = crf_internal_request_convert_form_textfield('user');
+  }
+}
 
+
+function crf_internal_request_convert_form_textfield($type, $machine_name = NULL) {
+  $options = array('' => '- Any -');
+  $query = new EntityFieldQuery();
+  if ($type == 'user') {
+    $result = $query
+      ->entityCondition('entity_type', $type)
+      ->execute();
+  }
+  else {
+    $result = $query
+      ->entityCondition('entity_type', $type)
+      ->entityCondition('bundle', $machine_name)
+      ->execute();
+  } 
+  if (!empty($result)) {
+    foreach (array_keys($result[$type]) as $id) {
+      if ($type == 'taxonomy_term') {
+        $entity = taxonomy_term_load($id);
+        $options[$id] = $entity->name;
+      }
+      else if ($type == 'node') {
+        $entity = node_load($id);
+        $options[$id] = $entity->title;
+      }
+      else if ($type == 'user') {
+        if ($id > 1) {
+          $entity = user_load($id);
+          $job_title_term = taxonomy_term_load($entity->field_job_title['und'][0]['tid']);
+          $options[$id] = t('@first_name @last_name (@job_title)', array('@first_name' => $entity->field_first_name['und'][0]['value'], '@last_name' => $entity->field_last_name['und'][0]['value'], '@job_title' => $job_title_term->name));
+        }
+      }
+    }
+  }
+  return array(
+    '#type' => 'select',
+    '#options' => $options,
+    '#default_value' => '',
+  );
+}
 
