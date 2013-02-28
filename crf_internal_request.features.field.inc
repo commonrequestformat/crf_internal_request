@@ -170,7 +170,7 @@ function crf_internal_request_field_default_fields() {
         'description_field' => 0,
         'entity_translation_sync' => FALSE,
         'file_directory' => '',
-        'file_extensions' => 'txt',
+        'file_extensions' => 'txt csv xls xlsx doc docx ppt pdf',
         'max_filesize' => '',
         'user_register_form' => FALSE,
       ),
