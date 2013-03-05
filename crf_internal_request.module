@@ -21,6 +21,24 @@ function crf_internal_request_node_presave($node) {
 /**
  * Implements hook_form_FORM_ID_alter().
  */
+function crf_internal_request_form_internal_request_node_form_alter(&$form, &$form_state, $form_id) {
+  $node = $form['#node'];
+  if (!isset($node->nid)) {  
+    $form['actions']['submit']['#value'] = t('Create & Send Info Request');
+    
+    // Help link
+    $help_link = theme('advanced_help_topic', array(
+      'module' => 'crf_internal_request',
+      'topic' => 'request-email',
+    ));
+    $form['field_append_to_alert_email']['#prefix'] = $help_link . '&nbsp;' . t('Show me an Information Request email example');
+  }
+}
+
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
 function crf_internal_request_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
   if ($form['#id'] == 'views-exposed-form-request-content-internal-request-content') {
     $form['nid'] = crf_internal_request_convert_form_textfield('node', 'internal_request');

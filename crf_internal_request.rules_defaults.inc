@@ -68,7 +68,7 @@ function crf_internal_request_default_rules_configuration() {
               { "mail" : {
                   "to" : [ "current-ocha-focal-point:mail" ],
                   "subject" : "New Internal OCHA Request for [node:field-reporting-type:name]",
-                  "message" : "Dear [current-ocha-focal-point:field-first-name] [current-ocha-focal-point:field-last-name],\\r\\n\\r\\nOCHA is requesting that you provide [node:field-reporting-type:name] information.\\r\\n\\r\\n[node:field-append-to-alert-email]\\r\\n\\r\\nKindly provide your information online: [node:url]\\r\\n\\r\\nKind regards,\\r\\nOCHA\\r\\n",
+                  "message" : "Dear [current-ocha-focal-point:field-first-name] [current-ocha-focal-point:field-last-name],\\r\\n\\r\\n[node:field-info-request-by:field-first-name] [node:field-info-request-by:field-last-name] is requesting that you provide [node:field-reporting-type:name] information.\\r\\n\\r\\n[node:field-append-to-alert-email]\\r\\n\\r\\nKindly provide your information online: [node:url]\\r\\n\\r\\nKind regards,\\r\\nOCHA\\r\\n",
                   "from" : [ "node:field-info-request-by:mail" ],
                   "language" : [ "" ]
                 }
