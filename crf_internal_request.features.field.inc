@@ -690,7 +690,7 @@ function crf_internal_request_field_default_fields() {
         'settings' => array(
           'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
         ),
-        'type' => 'options_buttons',
+        'type' => 'options_select',
         'weight' => '5',
       ),
       'workbench_access_field' => 0,
